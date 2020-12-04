@@ -6,9 +6,15 @@ export const useFetch = ( url ) => {
         data: null, 
         loading: true, 
         error: null
-    })
+    });
 
     useEffect(() => {
+
+        setState({
+            data: null,
+            loading: true,
+            error: null
+        });
         
         fetch(url)
             .then(resp => resp.json() )
@@ -20,7 +26,7 @@ export const useFetch = ( url ) => {
                 });
             });
 
-    }, [url])
+    }, [url]);
 
     return state;
 }
