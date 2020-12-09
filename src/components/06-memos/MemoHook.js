@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useCounter } from '../../hooks/useCounter'
-import { Small } from './Small';
+
 import '../02-useEffect/effect.css'
+import { procesoPesado } from '../helpers/procesoPesado';
 
-export const Memorize = () => {
+export const MemoHook = () => {
 
-    const {counter, increment} =  useCounter(10); 
-    
+    const {counter, increment} =  useCounter(5000); 
     const [show, setShow] = useState(true);
+
+    
+    const memoProcessPesado = useMemo(() => procesoPesado(counter), [counter]);
 
     return (
         <div>
-            <h1>Counter: <Small value={counter} /></h1>
+            <h1>MemoHook</h1>
+            <h3>Counter: <small>{counter}</small></h3>
             <hr />
+
+            <p>{memoProcessPesado}</p>
 
             <button 
                 className="btn btn-primary"
