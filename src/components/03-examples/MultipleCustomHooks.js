@@ -1,6 +1,6 @@
 import React from 'react'
-import { useCounter } from '../../hooks/useCounter'
 import { useFetch } from '../../hooks/useFetch'
+import { useCounter } from '../../hooks/useCounter'
 import '../02-useEffect/effect.css'
 
 export const MultipleCustomHooks = () => {
@@ -13,7 +13,7 @@ export const MultipleCustomHooks = () => {
     
     return (
         <>
-            <h1>Frases BreakingBad</h1>
+            <h1>BreakingBad Quotes</h1>
             <hr />
 
             {
