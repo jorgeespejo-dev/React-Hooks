@@ -9,6 +9,7 @@ export const todoReducer = (state = [], action) =>{
             return state.filter( todo => todo.id !== action.payload);
         
         case 'toggle':
+            //return nuevo state
             return state.map( todo => 
                 (todo.id === action.payload)
                     ? {...todo, done: !todo.done}
@@ -16,7 +17,8 @@ export const todoReducer = (state = [], action) =>{
              )
 
         case 'toggle-old':
-            //retorna nuevo valor 
+            //retorna nuevo valor
+            //map, retorna un nuevo valor 
             return state.map( todo => {
                 
                 if( todo.id === action.payload ){
