@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from 'react'
 import { todoReducer } from './todoReducer';
-import { useForm } from '../../hooks/useForm';
 import './styles.css';
 import { TodoList } from './TodoList';
+import { TodoAdd } from './TodoAdd';
 
 
 
@@ -16,9 +16,14 @@ export const TodoApp = () => {
 
     const [ todos, dispatch ] = useReducer(todoReducer, [], init);
 
-    const [{description}, handleInputChange, reset] = useForm({
-        description: ''
-    });
+    const handleAddTodo = (newTodo) =>{
+
+        dispatch({
+            type: 'add',
+            payload: newTodo
+        });
+
+    }
 
     useEffect(()=>{
 
@@ -46,30 +51,6 @@ export const TodoApp = () => {
     }
 
 
-    const handleSubmit = (e) =>{
-
-        e.preventDefault();
-
-        if(description.trim().length <= 1){
-            return;
-        }
-        
-        const newTodo = {
-            id: new Date().getTime(),
-            desc: description,
-            done: false
-        } 
-
-        const action = {
-            type: 'add',
-            payload: newTodo
-        }
-
-        dispatch(action);
-        reset();
-
-    }
-
     return (
         <div>
             <h1>TodoApp ({ todos.length }) </h1>
@@ -88,29 +69,9 @@ export const TodoApp = () => {
 
                 </div>
                 <div className="col">
-                    <h4>Agregar ToDo</h4>
-                    <hr />
-
-                    <form onSubmit={ handleSubmit }>
-
-                        <input
-                            type="text"
-                            name="description"
-                            className="form-control"
-                            placeholder="Aprender.."
-                            autoComplete="off"
-                            value={description}
-                            onChange={handleInputChange}
-                         />
-
-                         <button 
-                            type="submit"
-                            className="btn btn-outline-primary mt-1 btn-block"
-                         >
-                            Agregar
-                         </button>
-
-                    </form>
+                    <TodoAdd 
+                        handleAddTodo={handleAddTodo}
+                    />
                 </div>
             </div>
 
